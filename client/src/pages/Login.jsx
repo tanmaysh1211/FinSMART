@@ -440,7 +440,7 @@ export default function Login() {
           <img
             src={googleIcon}
             alt="Google"
-            className="w-full h-full object-contain"
+            style={{ width: "20px", height: "20px", maxWidth: "20px", maxHeight: "20px" }}
           />
         </div>
         <span className="text-sm font-medium truncate max-w-[180px]">
