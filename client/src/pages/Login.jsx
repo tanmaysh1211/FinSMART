@@ -472,19 +472,19 @@ export default function Login() {
 
       <button
             onClick={handleGoogleLogin}
-            className="mt-5 w-full flex items-center justify-center sm:justify-between gap-3 px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50"
-          >
-            <div className="flex items-center gap-3 mb-4">
+            className="mt-5 w-full flex items-center border rounded-xl shadow-sm hover:bg-gray-100 px-3 py-2"
+            >
+            <div className="flex items-center justify-center p-2 mr-3 rounded-lg bg-white">
               <img
                 src="https://developers.google.com/identity/images/g-logo.png"
                 alt="Google"
-                className="w-5 h-5"
+                className="w-6 h-6"
               />
-              <span className="text-sm font-medium">
+              <span className="flex-1 text-sm font-medium text-gray-700">
                 Sign in as tanmay
               </span>
             </div>
-            <span className="text-gray-500">⌄</span>
+            <span className="text-gray-500 text-lg ml-2">⌄</span>
           </button>
 
         </div>
