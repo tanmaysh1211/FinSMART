@@ -264,7 +264,6 @@ export default function Login() {
   // }, []);
 
 
-
     if (token) {
     //  Save token
     localStorage.setItem("token", token);
