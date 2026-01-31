@@ -28,7 +28,7 @@ router.get(
  */
 router.get("/google/callback", passport.authenticate("google", {
     session: false,
-    failureRedirect: "/login"
+    failureRedirect: `${process.env.CLIENT_URL}/login`
   }),
   (req, res) => {
      const token = jwt.sign(
@@ -43,11 +43,11 @@ router.get("/google/callback", passport.authenticate("google", {
     // );
 
     // Redirect back to frontend
-    // res.redirect(
-    //   `${process.env.CLIENT_URL}/login?token=${token}`
-    // );
+    res.redirect(
+      `${process.env.CLIENT_URL}/login?token=${token}`
+    );
 
-    res.redirect(`/login?token=${token}`);
+    // res.redirect(`/login?token=${token}`);
   }
 );
 

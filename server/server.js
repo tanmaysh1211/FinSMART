@@ -107,8 +107,8 @@ import "./loadEnv.js";
 
 import express from "express";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
 import helmet from "helmet";
 import passport from "passport";
@@ -131,7 +131,7 @@ app.set("trust proxy", 1);
 // app.use(cors());
 app.use(
   cors({
-    origin:true,
+    origin:process.env.CLIENT_URL,
     credentials: true,
   })
 );
@@ -149,16 +149,16 @@ app.use("/api/analytics", analyticsRoutes);
 
 app.use(errorMiddleware);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-// Serve React frontend
-app.use(express.static(path.join(__dirname, "dist")));
+// // Serve React frontend
+// app.use(express.static(path.join(__dirname, "dist")));
 
-// React Router fallback
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+// // React Router fallback
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 
 
 // app.listen(3002, () => {
