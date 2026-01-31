@@ -122,15 +122,16 @@ connectDB();
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://finsmart-client.onrender.com",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
 
-app.set("trust proxy", 1);
 app.use(helmet());
 app.use(express.json());
 app.use(passport.initialize());
@@ -143,6 +144,12 @@ app.use("/api/analytics", analyticsRoutes);
 
 app.use(errorMiddleware);
 
-app.listen(3002, () => {
-  console.log("Backend running on port 3002");
+// app.listen(3002, () => {
+//   console.log("Backend running on port 3002");
+// });
+
+const PORT = process.env.PORT || 3002;
+
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
