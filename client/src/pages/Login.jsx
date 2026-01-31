@@ -434,17 +434,17 @@ export default function Login() {
 
           {/* Google */}
       <button onClick={handleGoogleLogin}
-        className="mt-5 w-full flex items-center justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50">
+        className="mt-5 w-full flex items-center overflow-hidden justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50">
           <div className="flex items-center gap-3">
-        <div className="w-5 h-5 flex items-center justify-center overflow-hidden">
+        {/* <div className="w-5 h-5 flex items-center justify-center overflow-hidden">
           <img
             src={googleIcon}
             alt="Google"
             style={{ width: "20px", height: "20px", maxWidth: "20px", maxHeight: "20px" }}
           />
-        </div>
+        </div> */}
         <span className="text-sm font-medium truncate max-w-[180px]">
-          Continue as tanmay
+          Continue as Google User
         </span>
       </div>
         <span className="text-gray-500 text-sm">⌄</span>
