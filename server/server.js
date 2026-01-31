@@ -125,7 +125,7 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://finsmart-client.onrender.com",
     credentials: true,
   })
 );
