@@ -202,6 +202,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate , useLocation , useSearchParams } from "react-router-dom";
+console.log("LOGIN VERSION A");
 import api from "../services/api";
 // import { useSearchParams, useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
