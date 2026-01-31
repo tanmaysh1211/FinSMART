@@ -13,7 +13,7 @@ const Navbar = () => {
    const name = typeof user?.name === "string" ? user.name : ""; 
    const email = typeof user?.email === "string" ? user.email : ""; 
    const firstLetter = name ? name.charAt(0).toUpperCase() : "U";
-   
+
    return ( 
    
   //  <nav className="flex items-center justify-between px-6 py-4 bg-slate-100 shadow">
@@ -59,7 +59,8 @@ const Navbar = () => {
                 </div> 
                 </div> 
                 
-        <button onClick={logout} className="flex items-center gap-2 text-sm bg-slate-800 text-white px-4 py-2 rounded-md" > 
+        <button onClick={() => {logout(); navigate("/");}} 
+        className="flex items-center gap-2 text-sm bg-slate-800 text-white px-4 py-2 rounded-md" > 
              Logout 
           <span className="text-lg">⎋</span> 
           </button> 

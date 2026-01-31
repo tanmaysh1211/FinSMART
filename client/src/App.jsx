@@ -101,12 +101,10 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import Landing from "./pages/Landing";
-import { AuthProvider } from "./context/AuthContext";
 import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
-    <AuthProvider>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -135,7 +133,6 @@ function App() {
           }
         />
       </Routes>
-    </AuthProvider>
   );
 }
 
