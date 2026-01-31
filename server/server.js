@@ -104,8 +104,12 @@
 
 import "./loadEnv.js";
 
+
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import helmet from "helmet";
 import passport from "passport";
 
@@ -132,6 +136,7 @@ app.use(
   })
 );
 
+
 app.use(helmet());
 app.use(express.json());
 app.use(passport.initialize());
@@ -143,6 +148,18 @@ app.use("/api/analytics", analyticsRoutes);
 // app.use("/api/chatbot", chatbotRoutes);
 
 app.use(errorMiddleware);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve React frontend
+app.use(express.static(path.join(__dirname, "dist")));
+
+// React Router fallback
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 
 // app.listen(3002, () => {
 //   console.log("Backend running on port 3002");
