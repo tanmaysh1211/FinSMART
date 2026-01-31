@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    @apply bg-slate-100 text-slate-800;
+}
+
+.btn-primary {
+    @apply bg-slate-800 text-white px-4 py-2 rounded hover:bg-slate-700;
+}
+
+.feature-card {
+    @apply bg-white rounded-2xl p-8 transition-transform transition-shadow duration-300;
+    transform: perspective(1000px) translateZ(0);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+}
+
+.feature-card:hover {
+    transform: perspective(1000px) translateZ(20px);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.14);
+}
+
+.feature-card h3 {
+    @apply text-lg sm:text-xl;
+}
+
+.feature-card p {
+    @apply text-sm sm:text-base;
+}
+
+.input {
+    @apply border p-2 w-full rounded;
+}
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.question-btn {
+    @apply block bg-slate-800 text-white px-3 py-2 rounded mb-2 w-full text-left;
+}
+
+.cta-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.35s ease;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+.cta-primary:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.45);
+}
+.cta-secondary {
+    background: white;
+    border: 2px solid #6366f1;
+    padding: 16px 32px;
+    border-radius: 14px;
+    color: #6366f1;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.35s ease;
+}
+
+.cta-secondary:hover {
+    background: #eef2ff;
+    color: #4f46e5;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.25);
+}

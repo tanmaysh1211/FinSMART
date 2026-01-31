@@ -1,0 +1,17 @@
+# node
+node_modules/
+
+# env files
+client/.env
+server/.env
+.env.local
+
+# frontend
+client/node_modules/
+client/dist/
+
+# backend
+server/node_modules/
+
+# misc
+unwanted/
