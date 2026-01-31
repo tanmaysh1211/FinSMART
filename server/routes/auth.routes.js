@@ -41,10 +41,13 @@ router.get("/google/callback", passport.authenticate("google", {
     // res.redirect(
     //   `${process.env.CLIENT_URL}/oauth-success?token=${req.user.token}`
     // );
+
     // Redirect back to frontend
-    res.redirect(
-      `${process.env.CLIENT_URL}/login?token=${token}`
-    );
+    // res.redirect(
+    //   `${process.env.CLIENT_URL}/login?token=${token}`
+    // );
+
+    res.redirect(`/login?token=${token}`);
   }
 );
 
