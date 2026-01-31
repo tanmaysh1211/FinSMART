@@ -206,6 +206,7 @@ import api from "../services/api";
 // import { useSearchParams, useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import googleIcon from "../assets/google.png";
 
 const Spinner = () => (
   <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
@@ -244,14 +245,37 @@ export default function Login() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
 
+  //   if (token) {
+  //     localStorage.setItem("token", token);
+  //     api.get("/auth/me").then(res => {
+  //       setUser(res.data);
+  //       navigate("/dashboard");
+  //     });
+  //   }
+  // }, []);
+
+
+
     if (token) {
-      localStorage.setItem("token", token);
-      api.get("/auth/me").then(res => {
+    //  Save token
+    localStorage.setItem("token", token);
+
+    //  Clean URL
+    window.history.replaceState({}, "", "/dashboard");
+
+    //  Set user async (non-blocking)
+    api.get("/auth/me")
+      .then((res) => {
         setUser(res.data);
-        navigate("/dashboard");
+      })
+      .catch(() => {
+        // even if this fails, user is logged in
       });
-    }
-  }, []);
+
+    // 4️Navigate immediately
+    navigate("/dashboard", { replace: true });
+  }
+}, [navigate, setUser]);
 
   const handleGoogleLogin = () => {
     window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
@@ -413,11 +437,7 @@ export default function Login() {
             onClick={handleGoogleLogin}
             className="mt-5 w-full flex items-center justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50">
             <div className="flex items-center gap-3">
-              <img
-                src="https://developers.google.com/identity/images/g-logo.png"
-                alt="Google"
-                className="w-5 h-5"
-              />
+              <img src={googleIcon} alt="Google" />
               <span className="text-sm font-medium truncate max-w-[180px]">
                 Continue as tanmay
               </span>
