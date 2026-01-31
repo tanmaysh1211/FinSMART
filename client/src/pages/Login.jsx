@@ -242,12 +242,12 @@ export default function Login() {
 }, [location.state]);
 
 
-  useEffect(() => {
-  if (window.google?.accounts?.id) {
-    window.google.accounts.id.cancel();
-    window.google.accounts.id.disableAutoSelect();
-  }
-}, []);
+//   useEffect(() => {
+//   if (window.google?.accounts?.id) {
+//     window.google.accounts.id.cancel();
+//     window.google.accounts.id.disableAutoSelect();
+//   }
+// }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -461,15 +461,21 @@ export default function Login() {
 
 
       <button
-  onClick={handleGoogleLogin}
-  className="mt-5 w-full flex items-center justify-center px-4 py-3 
-             border rounded-xl shadow-sm 
-             bg-white hover:bg-gray-50"
->
-  <span className="text-sm font-semibold text-gray-700">
-    Continue with Google
-  </span>
-</button>
+            onClick={handleGoogleLogin}
+            className="mt-5 w-full flex items-center justify-center sm:justify-between gap-3 px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="https://developers.google.com/identity/images/g-logo.png"
+                alt="Google"
+                className="w-5 h-5"
+              />
+              <span className="text-sm font-medium">
+                Sign in as tanmay
+              </span>
+            </div>
+            <span className="text-gray-500">⌄</span>
+          </button>
 
         </div>
       </div>
