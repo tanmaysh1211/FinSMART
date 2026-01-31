@@ -175,7 +175,7 @@ export default function Register() {
             value={password} 
             placeholder="••••••••"
             className="mt-2 w-full h-[44px] px-4 pr-24 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
-             onFocus={() => setShowRules(true)}
+            onFocus={() => setShowRules(true)}
             onBlur={() => setShowRules(false)}
             onChange={(e) => setPassword(e.target.value)}
           />

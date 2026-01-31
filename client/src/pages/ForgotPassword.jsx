@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import api from "../services/api";
 import { checkPasswordRules, isPasswordValid } from "../utils/passwordRules";
 import PasswordRules from "../components/PasswordRules";
@@ -14,13 +14,16 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState(initialEmail);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [formError, setFormError] = useState("");
   const [showRules, setShowRules] = useState(false);
+
+  const [fieldError, setFieldError] = useState("");
 
    const rules = checkPasswordRules(newPassword);
 
   const handleSubmit = async () => {
-    setError("");
+    setFieldError("");
 
     if (!email || !newPassword || !confirmPassword) {
       setError("Fill all details");
@@ -28,30 +31,50 @@ export default function ForgotPassword() {
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Password don't match");
+      setFormError("Password don't match");
       return;
     }
 
     if (!isPasswordValid(newPassword)) {
-        setError("Password does not meet requirements");
+        setFormError("Password does not meet requirements");
     return;
     }
 
     // navigate(`/login?email=${encodeURIComponent(email)}`);
 
      try {
-    await api.post("/auth/reset-password", {
-      email,
-      newPassword,
-    });
-
+    await api.post("/auth/reset-password", { email, newPassword});
     navigate(`/login?email=${encodeURIComponent(email)}`);
   } catch (err) {
-    setError(
+    setFormError(
       err.response?.data?.message || "Password reset failed"
     );
   }
   };
+
+  const generatePassword = () => {
+  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const numbers = "0123456789";
+  const special = "@";
+
+  const all = upper + lower + numbers + special;
+
+  let password =
+    upper[Math.floor(Math.random() * upper.length)] +
+    lower[Math.floor(Math.random() * lower.length)] +
+    numbers[Math.floor(Math.random() * numbers.length)] +
+    "@";
+
+  for (let i = password.length; i < 10; i++) {
+    password += all[Math.floor(Math.random() * all.length)];
+  }
+
+  setNewPassword(password);
+    setConfirmPassword("");
+    setShowPassword(true);
+};
+
 
   return (
     <div className="min-h-screen bg-[#DCE6FF] flex items-center justify-center">
@@ -78,29 +101,86 @@ export default function ForgotPassword() {
           />
         </div>
 
+          {/* New Password */}
         <div className="mt-4">
           <label>New Password</label>
+
+          <div className="relative mt-2">
           <input
-            type="password"
-            className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border"
+            type={showPassword ? "text" : "password"}
+            value={newPassword} 
+            placeholder="••••••••"
+            className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
             onFocus={() => setShowRules(true)}
             onBlur={() => setShowRules(false)}
             onChange={(e) => setNewPassword(e.target.value)}
           />
-          {showRules && <PasswordRules rules={rules} />}
-        </div>
+          {fieldError && !password && (
+                      <p className="text-sm text-red-500 mt-1">{fieldError}</p>
+          )}
+          
+           {/* Generate + Eye */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/3 flex items-center gap-5">
+                <button
+                  type="button"
+                  onClick={generatePassword}
+                  className="text-lg font-bold text-indigo-600 hover:text-indigo-800 flex items-center justify-center h-6">
+                    Gen
+                </button>
+          
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                
+                </button>
+                </div>
+                </div>
+          
+                    {/* Password rules */}
+                    {showRules && <PasswordRules rules={rules} />}
+                </div>
+
+
 
         <div className="mt-4">
           <label>Confirm New Password</label>
+
+           <div className="relative mt-2">
           <input
-            type="password"
-            className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border"
+            type={showPassword ? "text" : "password"}
+            value={confirmPassword} 
+            placeholder="••••••••"
+            className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        </div>
 
-        {error && (
-          <p className="text-red-600 text-sm mt-2">{error}</p>
+          {fieldError && !confirmPassword && (
+              <p className="text-sm text-red-500 mt-1">{fieldError}</p>
+          )}
+          
+           {/* Generate + Eye */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/3 flex items-center gap-5">
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                
+                </button>
+                </div>
+          
+                    {/* Password rules */}
+                    {showRules && <PasswordRules rules={rules} />}
+          
+                    </div>
+               </div>
+
+        {formError && (
+          <p className="text-red-600 text-sm mt-2">{formError}</p>
         )}
 
         <button

@@ -313,8 +313,18 @@ export default function Login() {
     try {
       setLoading(true);
      const res = await api.post("/auth/login", { email: email.toLowerCase(), password });
+
+    //  save TOKEN
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+
+      // 3. Fetch user
+    const me = await api.get("/auth/me");
+    setUser(me.data);
+
+    // 4. Navigate
+    navigate("/dashboard", { replace: true });
+    
+      // navigate("/dashboard");
     } catch {
       // 3️⃣ Invalid credentials
       setAuthError(
