@@ -437,9 +437,9 @@ export default function Login() {
             onClick={handleGoogleLogin}
             className="mt-5 w-full flex items-center justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50">
             <div className="flex items-center gap-3">
-              <img src={googleIcon} alt="Google" />
+              <img src={googleIcon} alt="Google" className="w-5 h-5 object-contain" />
               <span className="text-sm font-medium truncate max-w-[180px]">
-                Continue as tanmay
+                Continue 
               </span>
             </div>
             <span className="text-gray-500">⌄</span>
