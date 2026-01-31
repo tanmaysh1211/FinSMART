@@ -102,7 +102,7 @@ export default function ForgotPassword() {
         </div>
 
           {/* New Password */}
-        <div className="mt-4">
+        <div className="mt-4 relative">
           <label>New Password</label>
 
           <div className="relative mt-2">
@@ -110,7 +110,7 @@ export default function ForgotPassword() {
             type={showPassword ? "text" : "password"}
             value={newPassword} 
             placeholder="••••••••"
-            className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
+   className="w-full mt-2 h-[44px] sm:h-[40px] px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
             onFocus={() => setShowRules(true)}
             onBlur={() => setShowRules(false)}
             onChange={(e) => setNewPassword(e.target.value)}
@@ -124,7 +124,7 @@ export default function ForgotPassword() {
                 <button
                   type="button"
                   onClick={generatePassword}
-                  className="text-lg font-bold text-indigo-600 hover:text-indigo-800 flex items-center justify-center h-6">
+            className="text-m font-bold mr-6 text-indigo-600 hover:text-indigo-800 flex items-center justify-center h-6">
                     Gen
                 </button>
           
@@ -133,7 +133,6 @@ export default function ForgotPassword() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
                 >
-                  {showPassword ? "🙈" : "👁️"}
                 
                 </button>
                 </div>
@@ -168,15 +167,11 @@ export default function ForgotPassword() {
                   onClick={() => setShowPassword(!showPassword)}
                   className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
                 >
-                  {showPassword ? "🙈" : "👁️"}
-                
+  
                 </button>
                 </div>
-          
-                    {/* Password rules */}
-                    {showRules && <PasswordRules rules={rules} />}
           ``
-                    </div>
+                </div>
                </div>
 
         {formError && (

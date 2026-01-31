@@ -174,7 +174,7 @@ export default function Register() {
             type={showPassword ? "text" : "password"}
             value={password} 
             placeholder="••••••••"
-            className="mt-2 w-full h-[44px] px-4 pr-24 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
+      className="mt-2 w-full h-[44px] sm:h-[40px] px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-grey-500"
             onFocus={() => setShowRules(true)}
             onBlur={() => setShowRules(false)}
             onChange={(e) => setPassword(e.target.value)}
@@ -185,11 +185,11 @@ export default function Register() {
           )}
 
  {/* Generate + Eye */}
-    <div className="absolute right-3 top-1/2 -translate-y-1/3 flex items-center gap-5">
+ <div className="absolute right-4 top-0 h-[44px] flex items-center gap-4">
       <button
         type="button"
         onClick={generatePassword}
-        className="text-lg font-bold text-indigo-600 hover:text-indigo-800 flex items-center justify-center h-6"> Gen
+        className="text-m font-bold mr-6 text-indigo-600 hover:text-indigo-800 h-6"> Gen
       </button>
 
       <button
@@ -197,8 +197,7 @@ export default function Register() {
         onClick={() => setShowPassword(!showPassword)}
         className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
       >
-        {showPassword ? "🙈" : "👁️"}
-      
+
       </button>
       </div>
 
@@ -232,19 +231,19 @@ export default function Register() {
           {/* Google */}
           <button
             onClick={handleGoogleLogin}
-            className="mt-5 w-full flex items-center justify-center sm:justify-between gap-3 px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50"
+            className="mt-5 w-full flex justify-center bg-transparent"
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center px-2 py-2 bg-white rounded-xl shadow-m hover:bg-gray-50">
               <img
                 src="https://developers.google.com/identity/images/g-logo.png"
                 alt="Google"
-                className="w-5 h-5"
+                className="w-6 h-6 mr-3"
               />
-              <span className="text-sm font-medium">
-                Sign in as tanmay
+              <span className="text-m font-medium text-gray-700">
+                Sign in to Google
               </span>
             </div>
-            <span className="text-gray-500">⌄</span>
+            {/* <span className="text-gray-500">⌄</span> */}
           </button>
         </div>
       </div>
