@@ -433,21 +433,21 @@ export default function Login() {
           </p>
 
           {/* Google */}
-          <button
+              <button
   onClick={handleGoogleLogin}
-  className="mt-5 w-full h-10 flex items-center justify-between px-4 border rounded-lg bg-white hover:bg-gray-50 transition"
+  className="mt-5 w-full flex items-center justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50"
 >
   <div className="flex items-center gap-3">
     <img
       src={googleIcon}
       alt="Google"
-      className="w-[18px] h-[18px] object-contain"
+      className="w-5 h-5 object-contain"
     />
-    <span className="text-sm font-medium text-gray-700">
-      Continue with Google
+    <span className="text-sm font-medium truncate max-w-[180px]">
+      Continue as tanmay
     </span>
   </div>
-  <span className="text-gray-400 text-sm">⌄</span>
+  <span className="text-gray-500 text-sm">⌄</span>
 </button>
         </div>
       </div>
