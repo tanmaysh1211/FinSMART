@@ -175,7 +175,7 @@ export default function ForgotPassword() {
           
                     {/* Password rules */}
                     {showRules && <PasswordRules rules={rules} />}
-          
+          ``
                     </div>
                </div>
 
