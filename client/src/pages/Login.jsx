@@ -481,7 +481,7 @@ export default function Login() {
                 className="w-6 h-6"
               />
               <span className="flex-1 text-sm font-medium text-gray-700">
-                Sign in as tanmay
+                Sign in to Google
               </span>
             </div>
             <span className="text-gray-500 text-lg ml-2">⌄</span>
