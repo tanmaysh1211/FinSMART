@@ -4,7 +4,6 @@ import api from "../services/api";
 import { checkPasswordRules, isPasswordValid } from "../utils/passwordRules";
 import PasswordRules from "../components/PasswordRules";
 
-
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -69,13 +68,10 @@ export default function ForgotPassword() {
   for (let i = password.length; i < 10; i++) {
     password += all[Math.floor(Math.random() * all.length)];
   }
-
   setNewPassword(password);
     setConfirmPassword("");
     setShowPassword(true);
 };
-
-
   return (
     <div className="min-h-screen bg-[#DCE6FF] flex items-center justify-center">
       <div className="w-full max-w-[420px] bg-[#EDF2FF] rounded-2xl shadow-xl px-6 sm:px-8 py-6 sm:py-8">
@@ -132,17 +128,14 @@ export default function ForgotPassword() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="text-gray-500 hover:text-gray-700 flex items-center justify-center h-6"
-                >
-                
+                >             
                 </button>
                 </div>
                 </div>
           
-                    {/* Password rules */}
-                    {showRules && <PasswordRules rules={rules} />}
+                {/* Password rules */}
+              {showRules && <PasswordRules rules={rules} />}
                 </div>
-
-
 
         <div className="mt-4">
           <label>Confirm New Password</label>
@@ -173,10 +166,7 @@ export default function ForgotPassword() {
           ``
                 </div>
                </div>
-
-        {formError && (
-          <p className="text-red-600 text-sm mt-2">{formError}</p>
-        )}
+        {formError && ( <p className="text-red-600 text-sm mt-2">{formError} </p> )}
 
         <button
           onClick={handleSubmit}
