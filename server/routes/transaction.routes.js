@@ -1,69 +1,14 @@
-// import express from "express";
-// import auth from "../middleware/auth.middleware.js";
-// import { addTransaction, getTransactions } from "../controllers/transaction.controller.js";
-// import authMiddleware from "../middleware/auth.middleware.js";
-
-// const router = express.Router();
-// router.post("/", auth, addTransaction);
-// router.get("/", auth, getTransactions);
-
-// router.get("/day-wise", authMiddleware, async (req, res) => {
-//   try {
-//     const data = await Transaction.aggregate([
-//       {
-//         $group: {
-//           _id: {
-//             date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
-//             type: "$type"
-//           },
-//           total: { $sum: "$amount" }
-//         }
-//       },
-//       { $sort: { "_id.date": 1 } }
-//     ]);
-
-//     const result = {};
-
-//     data.forEach(item => {
-//       const date = item._id.date;
-//       if (!result[date]) {
-//         result[date] = { date, income: 0, expense: 0 };
-//       }
-
-//       if (item._id.type === "INCOME") {
-//         result[date].income = item.total;
-//       } else {
-//         result[date].expense = item.total;
-//       }
-//     });
-
-//     res.json(Object.values(result));
-//   } catch (err) {
-//     res.status(500).json({ message: "Failed to fetch day-wise data" });
-//   }
-// });
-
-
-// export default router;
-
-
-
-
-
-
 import express from "express";
 import Transaction from "../models/Transaction.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import mongoose from "mongoose";
 const router = express.Router();
 
-/* =======================
-   ADD TRANSACTION
-======================= */
+/* ADD TRANSACTION */
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const tx = await Transaction.create({
-      user: req.user.id,   // 🔴 IMPORTANT
+      user: req.user.id,   
       text: req.body.text,
       amount: req.body.amount,
       type: req.body.type,
@@ -78,13 +23,6 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// router.get("/transactions", authMiddleware, async (req, res) => {
-//   const transactions = await Transaction.find({
-//     user: req.user.id
-//   }).sort({ date: -1 });
-
-//   res.json(transactions);
-// });
 router.get("/", authMiddleware, async (req, res) => {
   const transactions = await Transaction.find({
     user: req.user.id,
@@ -93,9 +31,7 @@ router.get("/", authMiddleware, async (req, res) => {
   res.json(transactions);
 });
 
-/* =======================
-   UPDATE TRANSACTION
-======================= */
+/* UPDATE TRANSACTION */
 router.put("/:id", authMiddleware, async (req, res) => {
   const updated = await Transaction.findOneAndUpdate(
     { _id: req.params.id, user: req.user.id },
@@ -106,9 +42,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
   res.json(updated);
 });
 
-/* =======================
-   DELETE TRANSACTION
-======================= */
+/* DELETE TRANSACTION */
 router.delete("/:id", authMiddleware, async (req, res) => {
   await Transaction.findOneAndDelete({
     _id: req.params.id,
@@ -125,12 +59,7 @@ function getFromDate(days) {
   return d;
 }
 
-
-
-/* =======================
-   INCOME vs EXPENSE
-======================= */
-
+/* INCOME vs EXPENSE */
 router.get("/income-expense", authMiddleware, async (req, res) => {
   try {
     const userId = new mongoose.Types.ObjectId(req.user.id);
@@ -142,7 +71,7 @@ if (fromDate) match.date = { $gte: fromDate };
     const data = await Transaction.aggregate([
       {
         // $match: {
-        //   user: userId   // ✅ ObjectId, NOT string
+        //   user: userId  
         // }
         $match:match
       },
@@ -154,64 +83,15 @@ if (fromDate) match.date = { $gte: fromDate };
       }
     ]);
 
-    console.log("INCOME EXPENSE AGG 👉", data);
+    console.log("INCOME EXPENSE AGG -> ", data);
     res.json(data);
   } catch (err) {
-    console.error("INCOME EXPENSE ERROR ❌", err);
+    console.error("INCOME EXPENSE ERROR ", err);
     res.status(500).json({ message: "Failed income-expense aggregation" });
   }
 });
 
-/* =======================
-   CATEGORY WISE EXPENSE
-======================= */
-// router.get("/category-wise", authMiddleware, async (req, res) => {
-//   const data = await Transaction.aggregate([
-//     { $match: { user: req.user.id, type: "EXPENSE" } },
-//     {
-//       $group: {
-//         _id: "$category",
-//         total: { $sum: "$amount" },
-//       },
-//     },
-//   ]);
-
-//   res.json(data);
-// });
-
-/* =======================
-   DAY WISE INCOME & EXPENSE
-======================= */
-// router.get("/day-wise", authMiddleware, async (req, res) => {
-//   const data = await Transaction.aggregate([
-//     { $match: { user: req.user.id } },
-//     {
-//       $group: {
-//         _id: {
-//           date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
-//           type: "$type",
-//         },
-//         total: { $sum: "$amount" },
-//       },
-//     },
-//     { $sort: { "_id.date": 1 } },
-//   ]);
-
-//   const result = {};
-
-//   data.forEach(item => {
-//     const date = item._id.date;
-//     if (!result[date]) result[date] = { date, income: 0, expense: 0 };
-
-//     if (item._id.type === "INCOME") result[date].income = item.total;
-//     else result[date].expense = item.total;
-//   });
-
-//   res.json(Object.values(result));
-// });
-
-
-
+/* DAY WISE EXPENSE */
 router.get("/day-wise", authMiddleware, async (req, res) => {
   try {
     const today = new Date();
@@ -230,7 +110,7 @@ if (fromDate) match.date = { $gte: fromDate };
     const data = await Transaction.aggregate([
       {
         // $match: {
-        //   user: new mongoose.Types.ObjectId(req.user.id), // 🔥 FIX
+        //   user: new mongoose.Types.ObjectId(req.user.id), 
         //   date: { $gte: last365 }
         // }
 
@@ -276,9 +156,7 @@ if (fromDate) match.date = { $gte: fromDate };
 });
 
 
-/* =======================
-   TOTAL TRANSACTIONS
-======================= */
+/* TOTAL TRANSACTIONS */
 router.get("/total", authMiddleware, async (req, res) => {
   try {
 
@@ -312,51 +190,7 @@ router.get("/total", authMiddleware, async (req, res) => {
   }
 });
 
-
-// router.get("/category-wise", authMiddleware, async (req, res) => {
-//   try {
-//      const today = new Date();
-//     const last365 = new Date();
-//     last365.setDate(today.getDate() - 365);
-
-//     const data = await Transaction.aggregate([
-//       {
-//         $match: {
-//           user: req.user.id,          // 🔴 correct field
-//           type: "EXPENSE",            // 🔴 only expense
-//           date: { $gte: last365 }     // 🔴 last 365 days
-//         }
-//       },
-//       {
-//         $group: {
-//           _id: "$category",           // 🔴 category only
-//           total: { $sum: "$amount" }
-//         }
-//       },
-//       {
-//         $project: {
-//           _id: 0,
-//           category: "$_id",
-//           total: 1
-//         }
-//       },
-//        {
-//         $sort: { total: -1 }          // optional but nice
-//       }
-//     ]);
-
-//     res.json(data);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Category-wise aggregation failed" });
-//   }
-// });
-
-
-
-/* =======================
-   CATEGORY WISE EXPENSE
-======================= */
+/* CATEGORY WISE EXPENSE */
 router.get("/category-wise", authMiddleware, async (req, res) => {
   try {
     const today = new Date();
@@ -375,7 +209,7 @@ if (fromDate) match.date = { $gte: fromDate };
     const data = await Transaction.aggregate([
       {
         // $match: {
-        //   user: new mongoose.Types.ObjectId(req.user.id), // ✅ FIX
+        //   user: new mongoose.Types.ObjectId(req.user.id), 
         //   type: "EXPENSE",
         //   date: { $gte: last365 }
         // }
@@ -406,7 +240,5 @@ if (fromDate) match.date = { $gte: fromDate };
     res.status(500).json({ message: "Category-wise aggregation failed" });
   }
 });
-
-
-
 export default router;
+
