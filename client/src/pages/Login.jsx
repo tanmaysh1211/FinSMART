@@ -1,205 +1,3 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
-// import api from "../services/api";
-
-// export default function Login() {
-//   const navigate = useNavigate();
-//   const { login } = useAuth();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleGoogleLogin = () => {
-//   window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
-// };
-
-//   const handleLogin = async () => {
-//     const res = await api.post("/auth/login", { email, password });
-//     login(res.data.token);
-//     navigate("/dashboard");
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center">
-//       <div className="bg-white p-6 rounded w-80">
-//         <h2 className="text-xl font-bold mb-4">Login</h2>
-
-//         <input
-//           className="border p-2 w-full mb-3"
-//           placeholder="Email"
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           className="border p-2 w-full mb-4"
-//           placeholder="Password"
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button
-//           className="bg-indigo-600 text-white w-full py-2 rounded"
-//           onClick={handleLogin}
-//         >
-//           Login
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
-// import api from "../services/api";
-
-// export default function Login() {
-//   const navigate = useNavigate();
-//   const { login } = useAuth();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleGoogleLogin = () => {
-//     window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
-//   };
-
-//   const handleLogin = async () => {
-//     const res = await api.post("/auth/login", { email, password });
-//     login(res.data.token);
-//     navigate("/dashboard");
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-//       <div className="bg-white p-6 rounded w-80 shadow">
-//         <h2 className="text-xl font-bold mb-4">Login</h2>
-
-//         <input
-//           className="border p-2 w-full mb-3"
-//           placeholder="Email"
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           className="border p-2 w-full mb-4"
-//           placeholder="Password"
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button
-//           className="bg-indigo-600 text-white w-full py-2 rounded mb-3"
-//           onClick={handleLogin}
-//         >
-//           Login
-//         </button>
-
-//         <button
-//           className="border w-full py-2 rounded flex justify-center items-center gap-2"
-//           onClick={handleGoogleLogin}
-//         >
-//           <img
-//             src="https://developers.google.com/identity/images/g-logo.png"
-//             className="w-5"
-//           />
-//           Continue with Google
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import api from "../services/api";
-
-// export default function Login() {
-//   const navigate = useNavigate();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//     const handleGoogleLogin = () => {
-//     window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
-//   };
-//   const handleLogin = async () => {
-//     const res = await api.post("/auth/login", { email, password });
-//     localStorage.setItem("token", res.data.token);
-//     navigate("/dashboard");
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-slate-100">
-//       <div className="bg-white p-8 rounded w-80 shadow">
-//         <h2 className="text-xl font-bold mb-4">Login</h2>
-
-//         <input
-//           className="border p-2 w-full mb-3"
-//           placeholder="Email"
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-
-//         <input
-//           type="password"
-//           className="border p-2 w-full mb-4"
-//           placeholder="Password"
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <button
-//           className="bg-indigo-600 text-white w-full py-2 rounded"
-//           onClick={handleLogin}
-//         >
-//           Login
-//         </button>
-
-//         <p className="text-sm mt-4 text-center">
-//           No account?{" "}
-//           <span
-//             className="text-indigo-600 cursor-pointer"
-//             onClick={() => navigate("/register")}
-//           >
-//             Register
-//           </span>
-
-//            <button
-//           className="border w-full py-2 rounded flex justify-center items-center gap-2"
-//           onClick={handleGoogleLogin}
-//         >
-//           <img
-//             src="https://developers.google.com/identity/images/g-logo.png"
-//             className="w-5"
-//           />
-//           Continue with Google
-//         </button>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState, useEffect } from "react";
 import { useNavigate , useLocation , useSearchParams } from "react-router-dom";
 console.log("LOGIN VERSION A");
@@ -242,14 +40,6 @@ export default function Login() {
   }
 }, [location.state]);
 
-
-//   useEffect(() => {
-//   if (window.google?.accounts?.id) {
-//     window.google.accounts.id.cancel();
-//     window.google.accounts.id.disableAutoSelect();
-//   }
-// }, []);
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
@@ -277,10 +67,7 @@ export default function Login() {
         setUser(res.data);
       })
       .catch(() => {
-        // even if this fails, user is logged in
       });
-
-    // 4️Navigate immediately
     navigate("/dashboard", { replace: true });
     }
   }, [navigate, setUser]);
@@ -301,7 +88,6 @@ export default function Login() {
   // };
 
   const handleLogin = async () => {
-
     setFieldError("");
     setAuthError("");
     
@@ -317,16 +103,12 @@ export default function Login() {
     //  save TOKEN
       localStorage.setItem("token", res.data.token);
 
-      // 3. Fetch user
     const me = await api.get("/auth/me");
     setUser(me.data);
 
-    // 4. Navigate
-    navigate("/dashboard", { replace: true });
-    
+    navigate("/dashboard", { replace: true });    
       // navigate("/dashboard");
     } catch {
-      // 3️⃣ Invalid credentials
       setAuthError(
         "Invalid credentials. Please make sure you are registered."
       );
