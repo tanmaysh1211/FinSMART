@@ -181,17 +181,6 @@ export default function Login() {
           )}
         </div>
 
-        {/* <div className="flex justify-end mt-2">
-  <span
-    onClick={() => 
-      navigate("/forgot-password", { state: { email } })}
-    className="text-sm text-indigo-600 cursor-pointer hover:underline"
-  >
-    Forgot password ?
-  </span>
-</div> */}
-
-
 <button
   type="button"
   className="mt-2 text-sm text-indigo-600 hover:underline self-end"
@@ -203,7 +192,7 @@ export default function Login() {
 </button>
 
           {/* Sign In */}
-          <button
+  <button
   onClick={handleLogin}
   disabled={loading}
   className={`w-full mt-6 py-2 rounded-xl text-white font-semibold 
@@ -232,25 +221,6 @@ export default function Login() {
               Sign up
             </span>
           </p>
-
-          {/* Google */}
-      {/* <button onClick={handleGoogleLogin} */}
-        {/* className="mt-5 w-full flex items-center justify-between px-4 py-2 border rounded-xl shadow-sm hover:bg-gray-50"> */}
-          {/* <div className="flex items-center gap-3"> */}
-        {/* <div className="w-5 h-5 flex items-center justify-center overflow-hidden">
-          <img
-            src={googleIcon}
-            alt="Google"
-            style={{ width: "20px", height: "20px", maxWidth: "20px", maxHeight: "20px" }}
-          />
-        </div> */}
-        {/* <span className="text-sm font-medium truncate max-w-[180px]"> */}
-          {/* Continue as Google User */}
-        {/* </span> */}
-      {/* </div> */}
-        {/* <span className="text-gray-500 text-sm">⌄</span> */}
-      {/* </button> */}
-
 
       <button
             onClick={handleGoogleLogin}
