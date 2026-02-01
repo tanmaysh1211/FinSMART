@@ -1,16 +1,3 @@
-// import User from "../models/User.js";
-// import { signToken } from "../utils/jwt.js";
-
-// export const login = async (req, res) => {
-//   const { email, name } = req.body;
-
-//   let user = await User.findOne({ email });
-//   if (!user) user = await User.create({ email, name });
-
-//   res.json({ token: signToken(user), user });
-// };
-
-
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { signToken } from "../utils/jwt.js";
@@ -23,7 +10,6 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "All fields required" });
     }
 
-     //  uppercase not allowed in email
     if (email !== email.toLowerCase()) {
       return res.status(400).json({ message: "Email must be lowercase only" });
     }
