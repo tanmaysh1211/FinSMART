@@ -76,19 +76,6 @@ const [range, setRange] = useState("365");
   <SpendingOverview range={range} />
 </div>
 
-
-    {/* MIDDLE CARD */}
-    {/* <div className="col-span-4 bg-white rounded-xl p-5 shadow">
-      <h3 className="font-semibold mb-1">Category Wise Expense</h3>
-      <p className="text-sm text-gray-500 mb-4">Last 365 days</p>
-
-      <div className="flex justify-center">
-        <div className="w-[220px] h-[220px]">
-          <CategoryExpenseChart />
-        </div>
-      </div>
-    </div> */}
-
     <div className="col-span-12 lg:col-span-4 bg-[#F2FBF8] rounded-xl shadow p-5 min-h-[300px]">
   <h3 className="font-semibold mb-1">Category Wise Expense</h3>
   <p className="text-sm text-gray-500 mb-4">
