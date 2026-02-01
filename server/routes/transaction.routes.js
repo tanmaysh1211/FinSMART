@@ -98,7 +98,7 @@ router.get("/day-wise", authMiddleware, async (req, res) => {
     const last365 = new Date();
     last365.setDate(today.getDate() - 365);
 
-    console.log("USER ID:", req.user.id); // 🔍 DEBUG
+    console.log("USER ID:", req.user.id); 
 
     const fromDate = getFromDate(req.query.days);
 
