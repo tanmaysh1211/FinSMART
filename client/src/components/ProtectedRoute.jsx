@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   // if (!user) return <Navigate to="/login" />;
   const { user, loading } = useAuth();
 
-  if (loading) return null; // or spinner
+  if (loading) return null; 
 
   if (!user) return <Navigate to="/login" />;
 
