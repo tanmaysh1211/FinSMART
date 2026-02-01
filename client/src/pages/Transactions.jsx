@@ -20,7 +20,7 @@ const [range, setRange] = useState("365"); // timeline
 
   const fetchTransactions = async () => {
     const res = await api.get("/transactions");
-    console.log("API DATA:", res.data); // 🔥 IMPORTANT
+    console.log("API DATA:", res.data); 
     setTransactions(res.data || []);
   };
 
@@ -32,19 +32,18 @@ const [range, setRange] = useState("365"); // timeline
 const [deleteTx, setDeleteTx] = useState(null);
 
 const filteredTransactions = transactions.filter((txn) => {
-  // 1️⃣ Timeline filter
   const now = new Date();
   const txDate = new Date(txn.date);
   const diffDays = (now - txDate) / (1000 * 60 * 60 * 24);
 
   if (diffDays > parseInt(range)) return false;
 
-  // 2️⃣ Category filter
+  // Category filter
   if (filterMode === "category" && selectedCategory) {
     return txn.category?.toLowerCase() === selectedCategory.toLowerCase();
   }
 
-  // 3️⃣ Type filter
+  //  Type filter
   if (filterMode === "type" && selectedType) {
     return txn.type?.toLowerCase() === selectedType.toLowerCase();
   }
@@ -196,7 +195,6 @@ const filteredTransactions = transactions.filter((txn) => {
     }}
   />
 )}
-
     </>
   );
 };
