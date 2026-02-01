@@ -201,8 +201,7 @@ export default function Register() {
       </button>
       </div>
 
-          {/* Password rules */}
-          {showRules && <PasswordRules rules={rules} />}
+    {showRules && <PasswordRules rules={rules} />}
 
           </div>
         </div>
