@@ -236,7 +236,6 @@ export default function Login() {
                 Sign in to Google
               </span>
             </div>
-            {/* <span className="text-gray-500 text-lg ml-2">⌄</span> */}
           </button>
 
         </div>

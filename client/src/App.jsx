@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import Landing from "./pages/Landing";
 import ForgotPassword from "./pages/ForgotPassword";
+import Chatbot from "./pages/Chatbot";
 
 function App() {
   return (
@@ -37,6 +38,13 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/chatbot" element={
+          <ProtectedRoute>
+            <Chatbot />
+          </ProtectedRoute>
+        }
+      />
       </Routes>
   );
 }

@@ -228,7 +228,7 @@ export default function Register() {
           </p>
 
           {/* Google */}
-          <button
+          {/* <button
             onClick={handleGoogleLogin}
             className="mt-5 w-full flex justify-center bg-transparent"
           >
@@ -242,8 +242,7 @@ export default function Register() {
                 Sign in to Google
               </span>
             </div>
-            {/* <span className="text-gray-500">⌄</span> */}
-          </button>
+          </button> */}
         </div>
       </div>
   );

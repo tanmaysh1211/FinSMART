@@ -13,8 +13,8 @@ import "./config/passport.js";
 import authRoutes from "./routes/auth.routes.js";
 import transactionRoutes from "./routes/transaction.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
-// import chatbotRoutes from "./routes/ai.routes.js";
 import errorMiddleware from "./middleware/error.middleware.js";
+import chatbotRoutes from "./routes/chatbot.routes.js";
 
 connectDB();
 
@@ -39,7 +39,7 @@ app.use("/api/auth", authRoutes);
 // const transactionRoutes = require("./routes/transaction.routes.js");
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/analytics", analyticsRoutes);
-// app.use("/api/chatbot", chatbotRoutes);
+app.use("/api/chatbot", chatbotRoutes);  
 
 app.use(errorMiddleware);
 

@@ -6,7 +6,13 @@ const userSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,   
     trim: true },
-  password: { type: String, required: true },   
+  password: { 
+    type: String, 
+    // required: true 
+     required: function () {
+    return !this.googleId; // required only if NOT Google user
+  },
+  },   
   googleId: String,
 });
 
