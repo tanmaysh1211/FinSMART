@@ -143,6 +143,7 @@
 
 
 import Transaction from "../models/Transaction.js";
+import OpenAI from "openai";
 
 // Helper: get date filter based on range
 const getDateFilter = (dateRange) => {
@@ -260,47 +261,69 @@ console.log("Message:", message);
 console.log("Date Range:", dateRange);
 console.log("Transactions found:", transactions.length);
 
-console.log("Calling Ollama...");
+console.log("Calling openai...");
 
-    // 3. Call Ollama
-    const ollamaRes = await fetch("http://127.0.0.1:11434/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "gemma3:1b",
-        stream: false,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user",   content: message },
-        ],
-      }),
+    // 3. Call Openai
+    // const openaiRes = await fetch("http://127.0.0.1:11434/api/chat", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     model: "gpt-4o-mini",
+    //     stream: false,
+    //     messages: [
+    //       { role: "system", content: systemPrompt },
+    //       { role: "user",   content: message },
+    //     ],
+    //   }),
+    // });
+
+    // console.log("Openai response received");
+
+    // if (!openaiRes.ok) {
+    //   const errText = await openaiRes.text();
+    //   console.error("openai error:", errText);
+    //   return res.status(502).json({
+    //     error:
+    //       "AI service unavailable. Make sure Openai server is running",
+    //   });
+    // }
+
+    // const openaiData = await openaiRes.json();
+    // const reply =
+    //   openaiData?.message?.content ||
+    //   "Sorry, I could not generate a response. Please try again.";
+
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
     });
 
-    console.log("Ollama response received");
+    const response = await openai.responses.create({
+  model: "gpt-4o-mini",
+  input: [
+    {
+      role: "system",
+      content: systemPrompt,
+    },
+    {
+      role: "user",
+      content: message,
+    },
+  ],
+});
 
-    if (!ollamaRes.ok) {
-      const errText = await ollamaRes.text();
-      console.error("Ollama error:", errText);
-      return res.status(502).json({
-        error:
-          "AI service unavailable. Make sure Ollama is running: ollama serve",
-      });
-    }
+const reply = response.output_text;
 
-    const ollamaData = await ollamaRes.json();
-    const reply =
-      ollamaData?.message?.content ||
-      "Sorry, I could not generate a response. Please try again.";
 
     return res.json({ reply });
 
   } catch (err) {
     console.error("Chatbot controller error:", err.message);
 
-    // Specific error if Ollama is not running
+    // Specific error if Openai is not running
     if (err.cause?.code === "ECONNREFUSED") {
       return res.status(502).json({
-        error: "Ollama is not running. Start it with: ollama serve",
+        error: "Openai server is not running.",
       });
     }
 

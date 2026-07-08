@@ -273,7 +273,7 @@ const Chatbot = () => {
     } catch (err) {
       const errMsg =
         err?.response?.data?.error ||
-        "Something went wrong. Make sure Ollama is running with: ollama serve";
+        "Something went wrong. Make sure openai server is running ";
       setMessages((prev) => [...prev, { role: "bot", content: `⚠️ ${errMsg}` }]);
     } finally {
       setLoading(false);
