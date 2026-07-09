@@ -1,15 +1,10 @@
-import axios from "axios";
-
-const getAuthHeader = () => {
-  const token = localStorage.getItem("token");
-  return { Authorization: `Bearer ${token}` };
-};
+import api from "./api";
 
 export const sendChatMessage = async (message, dateRange = "last_week") => {
-  const { data } = await axios.post(
-    "/api/chatbot/message",
-    { message, dateRange },
-    { headers: getAuthHeader() }
+  const { data } = await api.post(
+    "/chatbot/message",
+    { message, dateRange }
   );
+
   return data.reply;
 };
