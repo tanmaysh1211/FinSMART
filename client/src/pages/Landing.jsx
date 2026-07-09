@@ -32,9 +32,6 @@ useEffect(() => {
   return () => observer.disconnect();
 }, []);
 
-useEffect(() => {
-  requestAnimationFrame(() => setHeadingVisible(true));
-}, []);
 
 useEffect(() => {
   requestAnimationFrame(() => setShowCTA(true));
