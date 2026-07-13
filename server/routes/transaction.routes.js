@@ -4,7 +4,6 @@ import authMiddleware from "../middleware/authMiddleware.js";
 import mongoose from "mongoose";
 const router = express.Router();
 
-/* ADD TRANSACTION */
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const tx = await Transaction.create({
@@ -31,7 +30,6 @@ router.get("/", authMiddleware, async (req, res) => {
   res.json(transactions);
 });
 
-/* UPDATE TRANSACTION */
 router.put("/:id", authMiddleware, async (req, res) => {
   const updated = await Transaction.findOneAndUpdate(
     { _id: req.params.id, user: req.user.id },
@@ -42,7 +40,6 @@ router.put("/:id", authMiddleware, async (req, res) => {
   res.json(updated);
 });
 
-/* DELETE TRANSACTION */
 router.delete("/:id", authMiddleware, async (req, res) => {
   await Transaction.findOneAndDelete({
     _id: req.params.id,
@@ -59,25 +56,19 @@ function getFromDate(days) {
   return d;
 }
 
-/* INCOME vs EXPENSE */
 router.get("/income-expense", authMiddleware, async (req, res) => {
   try {
     const userId = new mongoose.Types.ObjectId(req.user.id);
 const fromDate = getFromDate(req.query.days);
-
 const match = { user: userId };
 if (fromDate) match.date = { $gte: fromDate };
-
     const data = await Transaction.aggregate([
       {
-        // $match: {
-        //   user: userId  
-        // }
         $match:match
       },
       {
         $group: {
-          _id: "$type",  // INCOME / EXPENSE
+          _id: "$type",  
           total: { $sum: "$amount" }
         }
       }
@@ -91,7 +82,6 @@ if (fromDate) match.date = { $gte: fromDate };
   }
 });
 
-/* DAY WISE EXPENSE */
 router.get("/day-wise", authMiddleware, async (req, res) => {
   try {
     const today = new Date();
@@ -109,11 +99,6 @@ if (fromDate) match.date = { $gte: fromDate };
 
     const data = await Transaction.aggregate([
       {
-        // $match: {
-        //   user: new mongoose.Types.ObjectId(req.user.id), 
-        //   date: { $gte: last365 }
-        // }
-
         $match:match
       },
       {
@@ -147,7 +132,6 @@ if (fromDate) match.date = { $gte: fromDate };
 
     const result = Object.values(map);
     console.log("DAY WISE RESULT:", result);
-
     res.json(result);
   } catch (err) {
     console.error(err);
@@ -155,8 +139,6 @@ if (fromDate) match.date = { $gte: fromDate };
   }
 });
 
-
-/* TOTAL TRANSACTIONS */
 router.get("/total", authMiddleware, async (req, res) => {
   try {
 
@@ -168,16 +150,12 @@ router.get("/total", authMiddleware, async (req, res) => {
 
     const data = await Transaction.aggregate([
       {
-        // $match: {
-        //   user: new mongoose.Types.ObjectId(req.user.id)
-        // }
-
         $match:match
       },
       {
         $group: {
-          _id: "$type",       // INCOME / EXPENSE
-          total: { $sum: 1 }  // COUNT documents
+          _id: "$type",       
+          total: { $sum: 1 }  
         }
       }
     ]);
@@ -190,13 +168,11 @@ router.get("/total", authMiddleware, async (req, res) => {
   }
 });
 
-/* CATEGORY WISE EXPENSE */
 router.get("/category-wise", authMiddleware, async (req, res) => {
   try {
     const today = new Date();
     const last365 = new Date();
     last365.setDate(today.getDate() - 365);
-
     const fromDate = getFromDate(req.query.days);
 
 const match = {
@@ -208,11 +184,6 @@ if (fromDate) match.date = { $gte: fromDate };
 
     const data = await Transaction.aggregate([
       {
-        // $match: {
-        //   user: new mongoose.Types.ObjectId(req.user.id), 
-        //   type: "EXPENSE",
-        //   date: { $gte: last365 }
-        // }
         $match:match
       },
       {
