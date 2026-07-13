@@ -1,6 +1,5 @@
 import Transaction from "../models/Transaction.js";
 
-/* SAVE TRANSACTION */
 export const addTransaction = async (req, res) => {
   const { text, amount, type, category, date } = req.body;
 
@@ -16,7 +15,6 @@ export const addTransaction = async (req, res) => {
   res.json(tx);
 };
 
-/* TOTAL INCOME & EXPENSE */
 export const summary = async (req, res) => {
   const result = await Transaction.aggregate([
     { $match: { user: req.userId } },
@@ -27,11 +25,9 @@ export const summary = async (req, res) => {
       },
     },
   ]);
-
   res.json(result);
 };
 
-/* CATEGORY WISE EXPENSE */
 export const categoryWise = async (req, res) => {
   const data = await Transaction.aggregate([
     { $match: { user: req.userId, type: "EXPENSE" } },
@@ -45,7 +41,6 @@ export const categoryWise = async (req, res) => {
   res.json(data);
 };
 
-/* DAY WISE INCOME & EXPENSE */
 export const dayWise = async (req, res) => {
   const data = await Transaction.aggregate([
     { $match: { user: req.userId } },
@@ -66,7 +61,6 @@ export const dayWise = async (req, res) => {
   res.json(data);
 };
 
-/* TOTAL TRANSACTIONS COUNT */
 export const totalTransactions = async (req, res) => {
   const count = await Transaction.countDocuments({ user: req.userId });
   res.json({ count });
