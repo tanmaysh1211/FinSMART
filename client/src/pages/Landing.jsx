@@ -4,11 +4,9 @@ import { useEffect, useState , useRef } from "react";
 export default function Landing() {
   const navigate = useNavigate();
   const [showCTA, setShowCTA] = useState(false);
-
   const ctaRef = useRef(null);
   const [ctaVisible, setCtaVisible] = useState(false);
   const [heroVisible, setHeroVisible] = useState(false);
-
   const whyRef = useRef(null);
   const [whyVisible, setWhyVisible] = useState(false);
 
@@ -42,10 +40,10 @@ useEffect(() => {
     ([entry]) => {
       if (entry.isIntersecting) {
         setCtaVisible(true);
-        observer.disconnect(); // run only once
+        observer.disconnect(); 
       }
     },
-    { threshold: 0.3 } // 30% visible = trigger
+    { threshold: 0.3 } 
   );
 
   if (ctaRef.current) observer.observe(ctaRef.current);
@@ -55,25 +53,18 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      
-      {/* NAVBAR */}
       <nav className="fixed top-0 left-0 w-full bg-white border-b border-slate-200 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        
-        {/* LOGO */}
         <div className={`flex items-center gap-3 font-semibold text-xl transition-all duration-700 ease-out
     ${showCTA ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
-          {/* <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white">
             🛡️
           </div> */}
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
           <span className="text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base">FS</span>
         </div>
-
           <span className="text-indigo-600 font-semibold">FinSmart</span>
         </div>
 
-        {/* CTA */}
         <button
           onClick={() => navigate("/login")}
           className={`bg-gradient-to-r from-indigo-500 to-purple-600  text-white px-4 py-2.5 rounded-lg
@@ -85,10 +76,7 @@ useEffect(() => {
       </div>
     </nav>
       
-            {/* HERO SECTION */}
-      <section className="min-h-[82vh] flex items-center justify-center bg-[#EEF3F1]">
-        {/* <div className="text-center max-w-3xl px-4 sm:px-2 mt-24 sm:mt-20"> */}
-        
+      <section className="min-h-[82vh] flex items-center justify-center bg-[#EEF3F1]">        
   <div className={`
       text-center max-w-3xl px-4 sm:px-6
       transition-all duration-700 ease-out
@@ -123,10 +111,7 @@ useEffect(() => {
   </div>
 </section>
 
- {/* WHY CHOOSE */}
       <section className="py-24 bg-[#F5F9F]">
-  {/* Heading */}
-  {/* <div className="text-center max-w-3xl mx-auto mb-20"> */}
    <div
     ref={whyRef}
     className={`
@@ -147,10 +132,8 @@ useEffect(() => {
 </div>
 
 
-  {/* Feature Cards */}
   <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-y-10 sm:gap-y-14 gap-x-6 sm:gap-x-24 px-4 sm:px-14">
     
-    {/* Smart Analytics */}
     <div className="feature-card">
       <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
         📈
@@ -164,7 +147,6 @@ useEffect(() => {
       </p>
     </div>
 
-    {/* Visual Reports */}
     <div className="feature-card">
       <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
         📊
@@ -178,7 +160,6 @@ useEffect(() => {
       </p>
     </div>
 
-    {/* Mobile First */}
     <div className="feature-card">
       <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
         📱
@@ -192,7 +173,6 @@ useEffect(() => {
       </p>
     </div>
 
-    {/* Lightning Fast */}
     <div className="feature-card">
       <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
         ⚡
@@ -210,7 +190,6 @@ useEffect(() => {
 </section>
 
       
-      {/* CTA */}
       <section className="w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 py-20">
       <div ref={ctaRef} className={`max-w-3xl mx-auto text-center px-6 transition-all duration-700 ease-out ${ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
                 
@@ -236,14 +215,11 @@ useEffect(() => {
     </section>
 
       <footer className="w-full">
-  {/* Top Gradient Strip */}
   <div className="h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
 
-  {/* Main Footer */}
   <div className="bg-[#0b1222]">
     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       
-      {/* Left: Logo */}
       <div className="flex items-center gap-3">        
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
           <span className="text-white font-bold text-lg">FS</span>
@@ -252,7 +228,6 @@ useEffect(() => {
           <span className="text-white font-bold text-lg">FinSmart</span>
       </div>
 
-      {/* Right: Copyright */}
       <p className="text-sm text-slate-400">
         © 2025 FinSmart. All rights reserved.
       </p>
