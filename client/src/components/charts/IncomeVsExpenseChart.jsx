@@ -1,6 +1,5 @@
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
-// import api from "../../services/api";
 import { getIncomeExpense } from "../../services/api";
 
 const IncomeVsExpenseChart = ({range}) => {
@@ -38,7 +37,6 @@ const IncomeVsExpenseChart = ({range}) => {
         ]
       });
     };
-
     fetchData();
   }, [range]);
 
@@ -77,4 +75,3 @@ const IncomeVsExpenseChart = ({range}) => {
 };
 
 export default IncomeVsExpenseChart;
-
