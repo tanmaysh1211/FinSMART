@@ -10,50 +10,36 @@ const Spinner = () => (
 
 export default function Register() {
   const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showRules, setShowRules] = useState(false);
-
   const [fieldError, setFieldError] = useState("");
-
   const [formError, setFormError] = useState("");
-
   const rules = checkPasswordRules(password);
   const allRulesPassed = Object.values(rules).every(Boolean);
-
   const [loading, setLoading] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async () => {
-
     setFieldError("");
-
     if (!name || !email || !password) {
       setFieldError("Fill the details");
       return;
     }
-
-    //  password rules validation
     if (!isPasswordValid(password)) {
       setFormError("Password does not meet requirements");
       return;
     }
-
     if (email !== email.toLowerCase()) {
       setFormError("Email must be lowercase only");
       return;
     }
-
     try {
       setLoading(true);
       await api.post("/auth/register", { name, email, password });
       navigate("/login");
     } catch(err) {
-      // setFormError("Registration failed");
       if (err.response?.status === 409) {
       setFormError("User Exists. Cannot be Re-Registered");
     } else if (err.response?.status === 400) {
@@ -85,14 +71,8 @@ export default function Register() {
   }
 
   setPassword(password);
-  setShowPassword(true); // show generated password
+  setShowPassword(true); 
 };
-
-  // const Rule = ({ ok, text }) => (
-  //   <p className={`flex items-center gap-2 text-sm ${ok ? "text-green-600" : "text-red-500"}`}>
-  //     {ok ? "✓" : "✕"} {text}
-  //   </p>
-  // );
 
    const handleGoogleLogin = () => {
     window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
@@ -101,7 +81,6 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-[#DCE6FF] flex items-center justify-center relative px-4">
 
-      {/* Back to Home */}
       <button
         onClick={() => navigate("/")}
         className="absolute top-3 left-3 text-sm font-bold text-gray-600 hover:text-indigo-600 
@@ -110,18 +89,14 @@ export default function Register() {
         ← Back to Home
       </button>
 
-      {/* Card */}
       <div className="w-full max-w-[420px] bg-[#EDF2FF] rounded-2xl shadow-xl px-6 sm:px-8 py-4 sm:py-6">
 
-        {/* Logo */}
         <div className="flex justify-center mb-4">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-          {/* <span className="text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base">FS</span> */}
           <span className="text-white font-bold text-lg">FS</span>
         </div>
         </div>
 
-        {/* Title */}
         <h2 className="mt-2 text-center text-indigo-600 text-2xl sm:text-3xl font-bold">
           FinSmart
         </h2>
@@ -132,7 +107,6 @@ export default function Register() {
           Join PocketGuard to start your financial journey
         </p>
 
-        {/* Form */}
         <div className="mt-8">
           <label className="text-m font-extrabold text-gray-700">
             Name
@@ -184,7 +158,6 @@ export default function Register() {
             <p className="text-sm text-red-500 mt-1">{fieldError}</p>
           )}
 
- {/* Generate + Eye */}
  <div className="absolute right-4 top-0 h-[44px] flex items-center gap-4">
       <button
         type="button"
@@ -206,7 +179,6 @@ export default function Register() {
           </div>
         </div>
 
-          {/* Create Account */}
           <button onClick={handleRegister} disabled={loading}
             className={`w-full mt-6 h-[44px] rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 
                        font-semibold text-black flex items-center justify-center transition-all duration-300
@@ -217,7 +189,6 @@ export default function Register() {
 
             {formError && (<p className="text-sm text-red-600 mt-3 text-center font-medium">{formError}</p>)}
 
-          {/* Login link */}
           <p className="text-center text-sm text-gray-600 mt-4">
             Already have an account?{" "}
             <span
@@ -226,23 +197,6 @@ export default function Register() {
               Sign in
             </span>
           </p>
-
-          {/* Google */}
-          {/* <button
-            onClick={handleGoogleLogin}
-            className="mt-5 w-full flex justify-center bg-transparent"
-          >
-            <div className="flex items-center px-2 py-2 bg-white rounded-xl shadow-m hover:bg-gray-50">
-              <img
-                src="https://developers.google.com/identity/images/g-logo.png"
-                alt="Google"
-                className="w-6 h-6 mr-3"
-              />
-              <span className="text-m font-medium text-gray-700">
-                Sign in to Google
-              </span>
-            </div>
-          </button> */}
         </div>
       </div>
   );
