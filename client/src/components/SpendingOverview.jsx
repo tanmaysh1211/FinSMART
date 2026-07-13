@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import api from "../services/api";
 import { getIncomeExpense } from "../services/api";
 
 export default function SpendingOverview({range}) {
@@ -23,7 +22,6 @@ setExpense(exp);
   const percentage =
   income === 0 ? 0 : Math.min(100, Math.round((expense / income) * 100));
 
-
   const angle = -180 + (percentage / 100) * 180;
 
   const R = 110;                 // radius
@@ -34,7 +32,6 @@ setExpense(exp);
 
   return (
     <div className="bg-[#F2FBF8] rounded-xl p-5 h-full">
-      {/* HEADER */}
       <div className="flex justify-between mb-4">
         <p className="text-sm font-medium">
         {range === "365" ? "LifeTime" : `Last ${range} days`} →
@@ -42,7 +39,6 @@ setExpense(exp);
 
       </div>
 
-      {/* SUMMARY */}
       <div className="flex justify-center gap-4 mb-6">
         <div className="bg-green-200 px-4 py-2 rounded-xl w-32 text-center">
           <p className="text-xs font-semibold">TOTAL INCOME</p>
@@ -54,10 +50,8 @@ setExpense(exp);
         </div>
       </div>
 
-      {/* GAUGE */}
       <div className="relative w-[280px] h-[150px] mx-auto">
         <svg width="280" height="150">
-          {/* Base arc */}
           <path
             d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`}
             fill="none"
@@ -66,7 +60,6 @@ setExpense(exp);
             strokeLinecap="round"
           />
 
-          {/* Filled arc */}
           <path
             d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`}
             fill="none"
@@ -77,7 +70,6 @@ setExpense(exp);
           />
         </svg>
 
-        {/* NEEDLE (FIXED CENTER, FIXED LENGTH) */}
         <div
           className="absolute"
           style={{
@@ -90,7 +82,6 @@ setExpense(exp);
           <div className="w-[100px] h-[3px] bg-red-600" />
         </div>
 
-        {/* PIVOT */}
         <div
           className="absolute w-4 h-4 bg-red-600 rounded-full"
           style={{
