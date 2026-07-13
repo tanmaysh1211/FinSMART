@@ -31,7 +31,6 @@ const [range, setRange] = useState("365");
       <Navbar />
 
      <div className="p-4 sm:p-6 space-y-6">
-  {/* TOP BUTTONS */}
   <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mb-6">
     <button
   className="bg-primary text-white px-4 py-2 rounded"
@@ -61,13 +60,7 @@ const [range, setRange] = useState("365");
     </button>
   </div>
 
-  {/* ROW 1 */}
-  {/* <div className="grid grid-cols-12 gap-6 mb-6"> */}
-  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
-
-
-    {/* LEFT CARD */}
-    {/* <div className="col-span-4 bg-white rounded-xl p-5 shadow">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
       <SummaryCards />
       <Gauge />
     </div> */}
@@ -87,18 +80,14 @@ const [range, setRange] = useState("365");
   </div>
 </div>
 
-{/* Total Transactions */}
   <div className="col-span-12 lg:col-span-4 bg-[#F2FBF8] rounded-xl shadow min-h-[300px]">
     <TotalTransactionsChart range={range} />
   </div>
 
   </div>
 
-  {/* ROW 2 */}
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-
-     {/* Income vs Expense */}  
   <div className="col-span-12 lg:col-span-5 bg-white rounded-xl shadow p-5 min-h-[300px]">
     <h3 className="font-semibold mb-3">Income vs Expense</h3>
     <div className="h-[240px]">
@@ -107,7 +96,6 @@ const [range, setRange] = useState("365");
   </div>
 
 
-     {/* Day-wise chart (WIDE) */}
   <div className="col-span-12 lg:col-span-7 bg-white rounded-xl shadow p-5 min-h-[300px]">
     <h3 className="font-semibold mb-3">Day Wise Income & Expense</h3>
     <div className="h-[240px]">
