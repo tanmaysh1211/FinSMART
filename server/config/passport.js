@@ -2,20 +2,11 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/User.js";
 
-// console.log("GOOGLE_CLIENT_ID =", process.env.GOOGLE_CLIENT_ID);
-// console.log("BACKEND_URL =", process.env.BACKEND_URL);
-// console.log(
-//   "CALLBACK URL =",
-//   `${process.env.BACKEND_URL}/api/auth/google/callback`
-// );
-
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`,
-      // callbackURL: "http://localhost:3002/api/auth/google/callback"
       callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback` 
     },
     async (accessToken, refreshToken, profile, done) => {
