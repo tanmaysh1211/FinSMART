@@ -39,7 +39,6 @@ export default function ForgotPassword() {
     return;
     }
 
-    // navigate(`/login?email=${encodeURIComponent(email)}`);
 
      try {
     await api.post("/auth/reset-password", { email, newPassword});
@@ -97,7 +96,6 @@ export default function ForgotPassword() {
           />
         </div>
 
-          {/* New Password */}
         <div className="mt-4 relative">
           <label>New Password</label>
 
@@ -115,7 +113,6 @@ export default function ForgotPassword() {
                       <p className="text-sm text-red-500 mt-1">{fieldError}</p>
           )}
           
-           {/* Generate + Eye */}
               <div className="absolute right-3 top-1/2 -translate-y-1/3 flex items-center gap-5">
                 <button
                   type="button"
@@ -133,7 +130,6 @@ export default function ForgotPassword() {
                 </div>
                 </div>
           
-                {/* Password rules */}
               {showRules && <PasswordRules rules={rules} />}
                 </div>
 
@@ -153,7 +149,6 @@ export default function ForgotPassword() {
               <p className="text-sm text-red-500 mt-1">{fieldError}</p>
           )}
           
-           {/* Generate + Eye */}
               <div className="absolute right-3 top-1/2 -translate-y-1/3 flex items-center gap-5">
                 <button
                   type="button"
@@ -163,7 +158,7 @@ export default function ForgotPassword() {
   
                 </button>
                 </div>
-          ``
+          
                 </div>
                </div>
         {formError && ( <p className="text-red-600 text-sm mt-2">{formError} </p> )}
