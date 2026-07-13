@@ -63,8 +63,8 @@ const TotalTransactionsChart = ({range}) => {
                 min: 0,
                 max: total === 0 ? 1 : undefined,
                  ticks: {
-          stepSize: 1,     // 🔥 forces 0,1,2,3,4,5
-          precision: 0,    // 🔥 no decimals ever
+          stepSize: 1,    
+          precision: 0,    
         },
               },
             },
