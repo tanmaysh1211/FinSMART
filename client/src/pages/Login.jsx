@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate , useLocation , useSearchParams } from "react-router-dom";
 console.log("LOGIN VERSION A");
 import api from "../services/api";
-// import { useSearchParams, useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import googleIcon from "../assets/google.png";
 
@@ -44,24 +42,9 @@ export default function Login() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
 
-  //   if (token) {
-  //     localStorage.setItem("token", token);
-  //     api.get("/auth/me").then(res => {
-  //       setUser(res.data);
-  //       navigate("/dashboard");
-  //     });
-  //   }
-  // }, []);
-
-
     if (token) {
-    //  Save token
     localStorage.setItem("token", token);
-
-    //  Clean URL
     window.history.replaceState({}, "", "/dashboard");
-
-    //  Set user async (non-blocking)
     api.get("/auth/me")
       .then((res) => {
         setUser(res.data);
@@ -76,17 +59,6 @@ export default function Login() {
       window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
     };
 
-
-  // const handleLogin = async () => {
-  //   try {
-  //     const res = await api.post("/auth/login", { email, password });
-  //     localStorage.setItem("token", res.data.token);
-  //     navigate("/dashboard");
-  //   } catch (err) {
-  //     alert("Invalid credentials");
-  //   }
-  // };
-
   const handleLogin = async () => {
     setFieldError("");
     setAuthError("");
@@ -99,15 +71,12 @@ export default function Login() {
     try {
       setLoading(true);
      const res = await api.post("/auth/login", { email: email.toLowerCase(), password });
-
-    //  save TOKEN
       localStorage.setItem("token", res.data.token);
 
     const me = await api.get("/auth/me");
     setUser(me.data);
 
     navigate("/dashboard", { replace: true });    
-      // navigate("/dashboard");
     } catch {
       setAuthError(
         "Invalid credentials. Please make sure you are registered."
@@ -120,7 +89,6 @@ export default function Login() {
   return (
     <div className="min-h-screen  bg-[#DCE6FF] flex items-center justify-center relative">
 
-      {/* Back to Home */}
       <button
         onClick={() => navigate("/")}
         className="absolute top-3 left-3 sm:top-6 sm:left-6 text-sm sm:text-base font-semibold text-gray-700 hover:text-indigo-600 flex items-center gap-2"
@@ -128,17 +96,14 @@ export default function Login() {
         ← Back to Home
       </button>
 
-      {/* Card */}
       <div className="w-full max-w-[450px] bg-[#EDF2FF] rounded-2xl shadow-xl px-6 sm:px-8 py-6 sm:py-10">
 
-        {/* Logo */}
         <div className="flex justify-center mb-6 ">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
           <span className="text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base">FS</span>
         </div>
         </div>
 
-        {/* Title */}
         <h2 className="text-center text-indigo-600 text-2xl sm:text-4xl font-bold">
           FinSmart
         </h2>
@@ -149,7 +114,6 @@ export default function Login() {
           Sign in to access your financial dashboard
         </p>
 
-        {/* Form */}
         <div className="mt-8">
           <label className="text-m font-extrabold text-gray-700">
             Email Address
@@ -191,7 +155,6 @@ export default function Login() {
   Forgot password ?
 </button>
 
-          {/* Sign In */}
   <button
   onClick={handleLogin}
   disabled={loading}
@@ -205,14 +168,12 @@ export default function Login() {
 </button>
 
 
-          {/* Auth error */}
         {authError && (
           <p className="text-sm text-red-600 mt-3 text-center">
             {authError}
           </p>
         )}
 
-          {/* Register */}
           <p className="text-center text-sm text-gray-600 mt-8">
             Don&apos;t have an account?{" "}
             <span
