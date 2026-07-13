@@ -12,11 +12,11 @@ const Transactions = () => {
   const [open, setOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
 
-  const [filterMode, setFilterMode] = useState("all"); // all | category | type
-const [selectedCategory, setSelectedCategory] = useState("");
-const [selectedType, setSelectedType] = useState("");
+  const [filterMode, setFilterMode] = useState("all"); 
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
-const [range, setRange] = useState("365"); // timeline
+const [range, setRange] = useState("365"); 
 
   const fetchTransactions = async () => {
     const res = await api.get("/transactions");
@@ -38,12 +38,10 @@ const filteredTransactions = transactions.filter((txn) => {
 
   if (diffDays > parseInt(range)) return false;
 
-  // Category filter
   if (filterMode === "category" && selectedCategory) {
     return txn.category?.toLowerCase() === selectedCategory.toLowerCase();
   }
 
-  //  Type filter
   if (filterMode === "type" && selectedType) {
     return txn.type?.toLowerCase() === selectedType.toLowerCase();
   }
@@ -102,10 +100,7 @@ const filteredTransactions = transactions.filter((txn) => {
 </div>
 
 
-          {/* <TransactionSummary transactions={filteredTransactions} /> */}
           <TransactionSummary transactions={filteredTransactions} range={range} setRange={setRange}/>
-
-
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               className="bg-slate-800 text-white px-4 py-2 rounded"
@@ -113,7 +108,6 @@ const filteredTransactions = transactions.filter((txn) => {
             >
               + Add transaction
             </button>
-
             <button
               className="bg-blue-600 text-white px-4 py-2 rounded"
               onClick={() => navigate("/dashboard")}
@@ -123,7 +117,6 @@ const filteredTransactions = transactions.filter((txn) => {
           </div>
         </div>
 
-        {/* <div className="bg-white rounded-xl shadow overflow-hidden"> */}
           <div className="bg-white rounded-xl shadow overflow-x-auto">
           <table className="w-full min-w-[640px]">
             <thead className="bg-[#1E2F4D] text-white">
@@ -158,7 +151,6 @@ const filteredTransactions = transactions.filter((txn) => {
         🗑️</button>
     </div>
   </td>
-
     </tr>
                 ))
               )}
